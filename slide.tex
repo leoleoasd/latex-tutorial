@@ -1,0 +1,186 @@
+%!LW recipe=XeLaTeXmk
+\newif\ifbjut
+\bjuttrue
+\documentclass[scheme=plain]{ctexbeamer}
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome5}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{outlines}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{tabularray}
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{academicons}
+\usepackage{pgfplots}
+\usepackage{pgfgantt}
+\usepackage{qrcode}
+\usepackage{ninecolors}
+
+\usetheme[
+    progressbar=frametitle,
+    numbering=fraction,
+    subsectionpage=progressbar,
+    titleformat title=smallcaps,
+    titleformat subtitle=smallcaps,
+    titleformat section=smallcaps,
+    titleformat frame=smallcaps]{metropolis}
+
+
+\ifbjut
+\definecolor{bjutblue}{HTML}{429ABF}
+\definecolor{bjutbluelight}{HTML}{C5EAF3}
+\definecolor{bjutbluedark}{HTML}{0096C3}
+\setbeamercolor{palette primary}{bg=bjutblue}
+\setbeamercolor{frametitle}{bg=bjutbluedark,fg=white}
+\setbeamercolor{progress bar}{fg=bjutbluedark}
+\else
+\setbeamercolor{palette primary}{bg=gray1}
+\setbeamercolor{frametitle}{bg=black,fg=white}
+\setbeamercolor{progress bar}{fg=black}
+\fi
+
+\usetikzlibrary{calc}
+\setcounter{tocdepth}{1}
+
+\makeatletter
+\newlength{\frametitle@padding}
+\setlength{\frametitle@padding}{2.2ex}
+\newcommand{\frametitlestrut@start}{
+  \rule{0pt}{\frametitle@padding +%
+    \totalheightof{%
+      \ifcsdef{frametitleformat}{\frametitleformat X}{X}%
+    }%
+  }%
+}
+
+\newcommand{\frametitlestrut@end}{
+  \rule[-\frametitle@padding]{0pt}{\frametitle@padding}
+}
+
+\setbeamertemplate{frametitle}{
+    \nointerlineskip%
+    \begin{beamercolorbox}[%
+        wd=\paperwidth,%
+        sep=0pt,%
+        leftskip=\frametitle@padding,%
+        rightskip=\frametitle@padding,%
+      ]{frametitle}%
+    \frametitlestrut@start%
+    \insertframetitle%
+    \hfill%
+    \nolinebreak%
+    \frametitlestrut@end%
+    \end{beamercolorbox}%
+    \begin{tikzpicture}[remember picture,overlay]
+        \coordinate (logo) at ([xshift=-1.8cm,yshift=-0.5cm]current page.north east);
+        \node at (logo) {\includegraphics[height=.1\textheight]{
+          \ifbjut
+          bjutwhite.pdf
+          \else
+          northeastern.eps
+          \fi
+        }};
+    \end{tikzpicture}
+}
+\makeatother
+
+
+\setbeamertemplate{footline}{
+    \hbox{%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=1.5ex,leftskip=2ex,rightskip=2ex]{page footer}%
+        \usebeamerfont{title in head/foot}%
+        \hfill
+        \begin{tblr}{
+            width=.8\linewidth,
+            colspec={X[l]X[c]X[r]}
+        }
+            \insertsectionhead{}
+            &
+            \ifx\insertsubsection\empty
+            \else
+            \insertsubsection{} 
+            \fi
+            &
+            \insertframenumber{} / \inserttotalframenumber
+        \end{tblr}
+        \hfill{}
+    \end{beamercolorbox}}%
+}
+
+\defbeamertemplate{section page}{my progressbar}{
+  \centering
+  \begin{minipage}{22em}
+    \raggedright
+    \usebeamercolor[fg]{section title}
+    \usebeamerfont{section title}
+    \insertsection\\[-1ex]
+    \usebeamertemplate*{progress bar in section page}
+    \par
+    \ifx\insertsubsectionhead\@empty\else%
+      \usebeamercolor[fg]{subsection title}%
+      \usebeamerfont{subsection title}%
+      \insertsubsectionhead
+    \fi
+  \end{minipage}
+  \par
+  \vspace{\baselineskip}
+}
+\setbeamertemplate{section page}[my progressbar]
+
+\UseTblrLibrary{booktabs}
+\graphicspath{ {./images/} }
+
+\title{LaTeX and Academic Typesetting}
+\author{Yuxuan Lu}
+% \institute{Northeastern Human-Centered AI Lab}
+\ifbjut
+\institute{北京工业大学程序设计集训队}
+\else
+\institute{Northeastern Human-Centered AI Lab}
+\fi
+
+\date{Feb. 5 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Takeaways \& Timeline}
+    \begin{outline}
+        \1 15-minute tutorial
+        \1 30-minute interactive exercise
+    \end{outline}
+\end{frame}
+
+\ifbjut
+\begin{frame}{Who am I}
+    \begin{outline}
+        \Large
+        \1 卢雨轩
+        \normalsize
+        \1 北工大2019级; 计算机科学与技术实验班
+        \1 美国东北大学 Ph.D. Student in Computer Science
+        \1 前北工大程序设计集训队队长（2019-2023）
+        
+
+    \end{outline}
+\end{frame}
+\fi
+
+\begin{frame}{Table of Contents}
+    \tableofcontents
+\end{frame}
+
+
+
+\end{document}
+
+
