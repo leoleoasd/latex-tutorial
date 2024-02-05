@@ -1,0 +1,112 @@
+% !TEX TS-program = xelatex
+%!LW recipe=XeLaTeXmk
+\documentclass{ctexart}
+\usepackage[T1]{fontenc}
+\usepackage[a4paper,top=1.5cm,bottom=1.5cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+\usepackage{mathtools}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage{outlines}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsthm}
+\usepackage{tabularray}
+\usepackage{minted}
+\usepackage[colorlinks=false, allcolors=blue]{hyperref}
+\usepackage{cleveref}
+\usepackage{tcolorbox}
+\renewcommand{\tableautorefname}{表}
+
+\UseTblrLibrary{booktabs}
+
+\newcounter{exercisecount}
+\newcommand\exercise{
+\addtocounter{exercisecount}{1}
+\section{练习 \theexercisecount}
+}
+\newenvironment{exercisedemo}[1]{
+\begin{tcolorbox}[title=练习\theexercisecount,sidebyside]
+\includegraphics{exercise/#1.pdf}
+\tcblower{}
+}{
+\end{tcolorbox}
+}
+
+\ctexset{
+    section = {
+        titleformat = \raggedright,
+        name = {,},
+    },
+    paragraph = {
+        runin = false
+    },
+    today = small,
+    figurename = 图,
+    contentsname = 目录,
+    tablename = 表,
+}
+
+\title{标题}
+\author{作者}
+
+\begin{document}
+
+\maketitle
+
+\exercise
+将本文标题改为 『LaTeX练习』
+
+\exercise
+将本文作者改为你的名字
+
+\exercise
+将本文章节标题的格式（如『练习1』）前面的编号改为『第X章』
+
+\exercise
+将本文章节标题的格式（如『练习1』）后面统一添加一个冒号
+
+\exercise
+将下文修改为左侧的样式
+\begin{exercisedemo}{1}
+123 321 1234567
+
+加粗 斜体 下划线
+\end{exercisedemo}
+
+\exercise
+英文字体
+\begin{exercisedemo}{4}
+Normal
+
+Bold
+
+Italic
+
+Typewriter
+
+Small Caps
+\end{exercisedemo}
+
+\exercise
+试试不同的字号
+\begin{exercisedemo}{3}
+\end{exercisedemo}
+
+
+\exercise
+随意插入一张图片
+
+\exercise
+使用minted包，插入一段格式化的python代码
+\begin{exercisedemo}{2}
+\end{exercisedemo}
+
+\exercise
+来点公式
+
+\begin{exercisedemo}{5}
+\end{exercisedemo}
+
+
+\end{document}
